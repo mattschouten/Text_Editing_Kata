@@ -1,0 +1,32 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - refs/tags/*
+  paths:
+    exclude:
+    - docs/oops-this-one-no-longer-exists.md
+    - README.md
+
+resources:
+  repositories:
+  - repository: self
+
+stages:
+  - stage: build
+    displayName: 'Build, Test, and Deploy'
+    jobs:
+      - job: 'build_test_deploy_DEV'
+        displayName: 'Build, test, and deploy to Dev'
+        condition: eq('${{ parameters.Environment }}', 'dev')
+  
+        pool:
+          vmImage: 'ubuntu-latest'
+  
+        variables:
+          - group: globaldata-dev-keyvault
+  
+        steps:
+        - bash: echo "This is not a very useful build script"
+          displayName: 'Super-useful build script'

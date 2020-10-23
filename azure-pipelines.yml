@@ -25,7 +25,9 @@ stages:
           vmImage: 'ubuntu-latest'
   
         variables:
-          - group: globaldata-dev-keyvault
+          - group: super_awesome_project_keyvault_variable_group_deV
+          # Hey, if you change ^^^ that line, I just realized, we standardized on dashes ("-")
+          # instead of underscores ("_") for variable group names.  Can you change that too, please?
   
         steps:
         - bash: echo "This is not a very useful build script"
